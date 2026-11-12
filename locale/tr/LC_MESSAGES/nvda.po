@@ -1,0 +1,620 @@
+msgid ""
+msgstr ""
+"Language: tr\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Toggles touchpad navigation"
+msgstr "Dokunmatik yüzeyle gezinmeyi açar veya kapatır"
+
+msgid "Touchpad navigation off."
+msgstr "Dokunmatik yüzeyle gezinme kapalı."
+
+msgid "Could not start touchpad navigation."
+msgstr "Dokunmatik yüzeyle gezinme başlatılamadı."
+
+msgid "No compatible Windows Precision Touchpad found."
+msgstr "Uyumlu bir Windows Precision Touchpad bulunamadı."
+
+msgid "Touchpad navigation on. Swipe with one finger to use the arrow and tab keys."
+msgstr "Dokunmatik yüzeyle gezinme açık. Ok ve sekme tuşlarını kullanmak için tek parmakla kaydırın."
+
+msgid "Default navigation"
+msgstr "Varsayılan dolaşım"
+
+msgid "Keyboard focus"
+msgstr "Klavye odağı"
+
+msgid "Arrow keys"
+msgstr "Ok tuşları"
+
+msgid "File Explorer tabs"
+msgstr "Dosya Gezgini sekmeleri"
+
+msgid "No next control of this type in the active window."
+msgstr "Etkin pencerede bu türde sonraki öğe yok."
+
+msgid "No previous control of this type in the active window."
+msgstr "Etkin pencerede bu türde önceki öğe yok."
+
+msgid "Buttons"
+msgstr "Düğmeler"
+
+msgid "Links"
+msgstr "Bağlantılar"
+
+msgid "Form fields"
+msgstr "Form alanları"
+
+msgid "Landmarks"
+msgstr "Sınır imleri"
+
+msgid "Headings"
+msgstr "Başlıklar"
+
+msgid "Text fields"
+msgstr "Metin alanları"
+
+msgid "Checkboxes"
+msgstr "Onay kutuları"
+
+msgid "Radio buttons"
+msgstr "Seçenek düğmeleri"
+
+msgid "Combo boxes"
+msgstr "Açılır kutular"
+
+msgid "Lists"
+msgstr "Listeler"
+
+msgid "List items"
+msgstr "Liste öğeleri"
+
+msgid "Tree views"
+msgstr "Ağaç görünümleri"
+
+msgid "Tree items"
+msgstr "Ağaç öğeleri"
+
+msgid "Table rows"
+msgstr "Tablo satırları"
+
+msgid "Table cells"
+msgstr "Tablo hücreleri"
+
+msgid "Toolbars"
+msgstr "Araç çubukları"
+
+msgid "Tables"
+msgstr "Tablolar"
+
+msgid "Images"
+msgstr "Görseller"
+
+msgid "Visited links"
+msgstr "Ziyaret edilen bağlantılar"
+
+msgid "Unvisited links"
+msgstr "Ziyaret edilmeyen bağlantılar"
+
+msgid "Text outside links"
+msgstr "Bağlantı dışındaki metin"
+
+msgid "Block quotes"
+msgstr "Blok alıntılar"
+
+msgid "Separators"
+msgstr "Ayırıcılar"
+
+msgid "Frames"
+msgstr "Çerçeveler"
+
+msgid "Embedded objects"
+msgstr "Gömülü nesneler"
+
+msgid "Annotations"
+msgstr "Açıklamalar"
+
+msgid "Text paragraphs"
+msgstr "Metin paragrafları"
+
+msgid "Spelling errors"
+msgstr "Yazım hataları"
+
+msgid "Level {level} headings"
+msgstr "{level}. düzey başlıklar"
+
+msgid "Double-tap activation is unavailable on this Windows version."
+msgstr "Bu Windows sürümünde çift dokunarak etkinleştirme kullanılamıyor."
+
+msgid "Windows tap and scroll gestures could not be suspended."
+msgstr "Windows’un dokunma ve kaydırma hareketleri duraklatılamadı."
+
+msgid "Windows three- and four-finger gestures could not be suspended."
+msgstr "Windows’un üç ve dört parmak hareketleri duraklatılamadı."
+
+msgid "General"
+msgstr "Genel ayarlar"
+
+msgid "OK"
+msgstr "Tamam"
+
+msgid "Cancel"
+msgstr "İptal"
+
+msgid "Gesture customization"
+msgstr "Hareket özelleştirmeleri"
+
+msgid "Create a gesture"
+msgstr "Hareket oluştur"
+
+msgid "About"
+msgstr "Hakkında"
+
+msgid "Interface language"
+msgstr "Arayüz dili"
+
+msgid "Follow NVDA"
+msgstr "NVDA’nın dilini kullan"
+
+msgid "Touchpad navigation shortcut"
+msgstr "Touchpad gezinmesini açma ve kapatma kısayolu"
+
+msgid "Restore default shortcut"
+msgstr "Varsayılan kısayolu geri yükle"
+
+msgid "Import settings and layouts…"
+msgstr "Ayarları ve düzenleri içe aktar…"
+
+msgid "Export settings and layouts…"
+msgstr "Ayarları ve düzenleri dışa aktar…"
+
+msgid "Application profile"
+msgstr "Uygulama profili"
+
+msgid "Add application profile…"
+msgstr "Uygulama profili ekle…"
+
+msgid "Remove application profile…"
+msgstr "Uygulama profilini kaldır…"
+
+msgid "Gestures and assigned actions"
+msgstr "Hareketler ve atanan eylemler"
+
+msgid "Assign action…"
+msgstr "Eylem ata…"
+
+msgid "Restore inherited assignment"
+msgstr "Varsayılan atamaya dön"
+
+msgid "Delete custom gesture…"
+msgstr "Özel hareketi sil…"
+
+msgid "Draw one continuous gesture with one finger, then lift it. Repeat the same shape and direction."
+msgstr "Tek parmağınızla kesintisiz bir hareket çizin ve parmağınızı kaldırın. Aynı şekli aynı yönde tekrarlayın."
+
+msgid "Gesture name"
+msgstr "Hareket adı"
+
+msgid "Save in profile"
+msgstr "Kaydedilecek profil"
+
+msgid "Record first sample"
+msgstr "İlk örneği kaydet"
+
+msgid "Record confirmation sample"
+msgstr "Doğrulama örneğini kaydet"
+
+msgid "Save gesture and assign action…"
+msgstr "Hareketi kaydet ve eylem ata…"
+
+msgid "Cancel recording"
+msgstr "Kaydı iptal et"
+
+msgid "TouchWiz Access was developed by Sarper Arıkan using agentic engineering."
+msgstr "TouchWiz Access, Sarper Arıkan tarafından agentic mühendislik kullanılarak geliştirildi."
+
+msgid "Email Sarper Arıkan (sarperarikan@gmail.com)"
+msgstr "Sarper Arıkan’a e-posta gönder (sarperarikan@gmail.com)"
+
+msgid "Personal website (sarperarikan.net)"
+msgstr "Kişisel web sitesi (sarperarikan.net)"
+
+msgid "Sarper Arıkan on GitHub (sarperarikan)"
+msgstr "Sarper Arıkan’ın GitHub profili (sarperarikan)"
+
+msgid "Global defaults"
+msgstr "Genel varsayılanlar"
+
+msgid "Disabled"
+msgstr "Devre dışı"
+
+msgid "(inherited)"
+msgstr "(genel profilden)"
+
+msgid "Unassigned"
+msgstr "Atanmamış"
+
+msgid "Built-in behavior"
+msgstr "Yerleşik davranış"
+
+msgid "Executable name, for example notepad.exe"
+msgstr "Uygulamanın yürütülebilir dosya adı, örneğin notepad.exe"
+
+msgid "Enter an executable name ending in .exe."
+msgstr ".exe ile biten bir uygulama dosyası adı girin."
+
+msgid "Delete this application profile and its assignments?"
+msgstr "Bu uygulama profili ve atamaları silinsin mi?"
+
+msgid "NVDA action"
+msgstr "NVDA eylemi"
+
+msgid "Keyboard shortcut"
+msgstr "Klavye kısayolu"
+
+msgid "Windows shortcut"
+msgstr "Windows kısayolu"
+
+msgid "Launch an application"
+msgstr "Uygulama başlat"
+
+msgid "Choose an action type"
+msgstr "Eylem türü seçin"
+
+msgid "Choose an NVDA action"
+msgstr "NVDA eylemi seçin"
+
+msgid "Choose an application"
+msgstr "Uygulama seçin"
+
+msgid "Windows applications"
+msgstr "Windows uygulamaları"
+
+msgid "Enter a shortcut, for example control+f or windows+e."
+msgstr "Bir kısayol girin. Örneğin control+f veya windows+e."
+
+msgid "Invalid shortcut."
+msgstr "Geçersiz kısayol."
+
+msgid "Delete this custom gesture from all profiles?"
+msgstr "Bu özel hareket tüm profillerden silinsin mi?"
+
+msgid "The touchpad could not be opened for recording."
+msgstr "Touchpad kayıt için açılamadı."
+
+msgid "Perform the confirmation sample now."
+msgstr "Doğrulama hareketini şimdi yapın."
+
+msgid "Perform the first sample now."
+msgstr "İlk hareketi şimdi yapın."
+
+msgid "First sample recorded. Start the confirmation sample."
+msgstr "İlk örnek kaydedildi. Doğrulama örneğini başlatın."
+
+msgid "Samples match. The gesture can be saved."
+msgstr "Örnekler eşleşti. Hareketi kaydedebilirsiniz."
+
+msgid "The two samples did not match. Record both again."
+msgstr "İki örnek eşleşmedi. İkisini de yeniden kaydedin."
+
+msgid "Enter a gesture name."
+msgstr "Bir hareket adı girin."
+
+msgid "This gesture matches a saved gesture. Assign the saved gesture to the profile."
+msgstr "Bu hareket kayıtlı bir hareketle eşleşiyor. Kayıtlı hareketi profile atayın."
+
+msgid "Gesture added. Press OK to save changes."
+msgstr "Hareket eklendi. Değişiklikleri kaydetmek için Tamam’a basın."
+
+msgid "Settings could not be saved."
+msgstr "Ayarlar kaydedilemedi."
+
+msgid "The settings and layouts file could not be imported."
+msgstr "Ayar ve düzen dosyası içe aktarılamadı."
+
+msgid "Settings and layouts imported. Press OK to save changes."
+msgstr "Ayarlar ve düzenler içe aktarıldı. Kaydetmek için Tamam’a basın."
+
+msgid "The settings and layouts file could not be exported."
+msgstr "Ayar ve düzen dosyası dışa aktarılamadı."
+
+msgid "Settings and layouts exported."
+msgstr "Ayarlar ve düzenler dışa aktarıldı."
+
+msgid "Swipe right"
+msgstr "Sağa kaydırma"
+
+msgid "Swipe left"
+msgstr "Sola kaydırma"
+
+msgid "Swipe up"
+msgstr "Yukarı kaydırma"
+
+msgid "Swipe down"
+msgstr "Aşağı kaydırma"
+
+msgid "Turn rotor clockwise"
+msgstr "Rotoru saat yönünde döndürme"
+
+msgid "Turn rotor counterclockwise"
+msgstr "Rotoru saat yönünün tersine döndürme"
+
+msgid "Single-finger double tap"
+msgstr "Tek parmakla çift dokunma"
+
+msgid "Three-finger swipe right"
+msgstr "Üç parmakla sağa kaydırma"
+
+msgid "Three-finger swipe left"
+msgstr "Üç parmakla sola kaydırma"
+
+msgid "Switch to the next open window"
+msgstr "Sonraki açık pencereye geç"
+
+msgid "Switch to the previous open window"
+msgstr "Önceki açık pencereye geç"
+
+msgid "Interface and guide language"
+msgstr "Arayüz ve kılavuz dili"
+
+msgid "Open user guide…"
+msgstr "Kullanım kılavuzunu aç…"
+
+msgid "The user guide could not be opened."
+msgstr "Kullanım kılavuzu açılamadı."
+
+msgid "This NVDA action is unavailable in the current application."
+msgstr "Bu NVDA eylemi etkin uygulamada kullanılamıyor."
+
+msgid "The assigned action could not be run."
+msgstr "Atanan eylem çalıştırılamadı."
+
+msgid "Start gesture wizard…"
+msgstr "Hareket sihirbazını başlat…"
+
+msgid "Record the first sample"
+msgstr "İlk örneği kaydet"
+
+msgid "Confirm the gesture"
+msgstr "Hareketi doğrula"
+
+msgid "Name the gesture and assign an action"
+msgstr "Hareketi adlandır ve eylem ata"
+
+msgid "Test the gesture"
+msgstr "Hareketi dene"
+
+msgid "Draw one continuous gesture with one finger, then lift it."
+msgstr "Tek parmağınızla kesintisiz bir hareket çizin ve parmağınızı kaldırın."
+
+msgid "Waiting for a touchpad gesture."
+msgstr "Dokunmatik yüzey hareketi bekleniyor."
+
+msgid "Record again"
+msgstr "Yeniden kaydet"
+
+msgid "Test again"
+msgstr "Tekrar dene"
+
+msgid "Test the assigned action in the target application after saving settings"
+msgstr "Ayarları kaydettikten sonra atanan eylemi hedef uygulamada dene"
+
+msgid "Choose action…"
+msgstr "Eylem seç…"
+
+msgid "No action selected."
+msgstr "Eylem seçilmedi."
+
+msgid "Record the first sample before continuing."
+msgstr "Devam etmeden önce ilk örneği kaydedin."
+
+msgid "Record a matching confirmation sample before continuing."
+msgstr "Devam etmeden önce eşleşen bir doğrulama örneği kaydedin."
+
+msgid "Use this gesture in the selected profile?"
+msgstr "Bu hareket seçilen profilde kullanılsın mı?"
+
+msgid "Enter a gesture name and choose an action before continuing."
+msgstr "Devam etmeden önce hareket adı girin ve bir eylem seçin."
+
+msgid "This gesture overlaps a built-in gesture: {gestures}."
+msgstr "Bu hareket yerleşik bir hareketle çakışıyor. Çakışan hareket {gestures}."
+
+msgid "Draw the gesture again to test recognition. The action runs in the application after saving."
+msgstr "Algılamayı denemek için hareketi tekrar çizin. Eylem, kaydettikten sonra uygulamada çalışır."
+
+msgid "First sample recorded. Select Next to confirm."
+msgstr "İlk örnek kaydedildi. Doğrulamak için İleri’yi seçin."
+
+msgid "Samples did not match. Record the confirmation again or go back."
+msgstr "Örnekler eşleşmedi. Doğrulama örneğini yeniden kaydedin veya geri dönün."
+
+msgid "This gesture matches the saved gesture {name}. Go back to record a different gesture."
+msgstr "Bu hareket, kayıtlı {name} hareketiyle eşleşiyor. Farklı bir hareket kaydetmek için geri dönün."
+
+msgid "Samples match. Select Next to assign an action."
+msgstr "Örnekler eşleşti. Bir eylem atamak için İleri’yi seçin."
+
+msgid "Test passed. The gesture was recognized."
+msgstr "Deneme başarılı. Hareket tanındı."
+
+msgid "Gesture not recognized. Select Test again to retry."
+msgstr "Hareket tanınmadı. Yeniden denemek için Tekrar dene’yi seçin."
+
+msgid "Switch to the target application and draw the gesture within 30 seconds."
+msgstr "Hedef uygulamaya geçip 30 saniye içinde hareketi çizin."
+
+msgid "The action test timed out."
+msgstr "Eylemi deneme süresi doldu."
+
+msgid "Test gesture recognized. The assigned action was sent."
+msgstr "Deneme hareketi tanındı. Atanan eylem gönderildi."
+
+msgid "Tap or swipe with one to five fingers, or draw with one finger. Lift all fingers when finished."
+msgstr "Bir ila beş parmakla dokunun veya kaydırın ya da tek parmakla bir şekil çizin. Bitirince tüm parmaklarınızı kaldırın."
+
+msgid "Windows could not suspend every built-in touchpad gesture on this device."
+msgstr "Windows, bu cihazdaki yerleşik touchpad hareketlerinin tümünü duraklatamadı."
+
+msgid "No gesture was recognized. Lift all fingers and try again."
+msgstr "Hareket tanınmadı. Tüm parmaklarınızı kaldırıp tekrar deneyin."
+
+msgid "One-finger drawing."
+msgstr "Tek parmakla çizim."
+
+msgid "Single tap"
+msgstr "Tek dokunma"
+
+msgid "Double tap"
+msgstr "Çift dokunma"
+
+msgid "Triple tap"
+msgstr "Üç kez dokunma"
+
+msgid "Fingers: {count}. {gesture}."
+msgstr "{count} parmak. {gesture}."
+
+msgid "Open File Explorer"
+msgstr "Dosya Gezgini’ni aç"
+
+msgid "Open Windows Settings"
+msgstr "Windows Ayarları’nı aç"
+
+msgid "Open Accessibility settings"
+msgstr "Erişilebilirlik ayarlarını aç"
+
+msgid "Open Quick Settings"
+msgstr "Hızlı Ayarlar’ı aç"
+
+msgid "Open Windows Search"
+msgstr "Windows Arama’yı aç"
+
+msgid "Open Run"
+msgstr "Çalıştır’ı aç"
+
+msgid "Show or hide the desktop"
+msgstr "Masaüstünü göster veya gizle"
+
+msgid "Open Task View"
+msgstr "Görev Görünümü’nü aç"
+
+msgid "Switch to the next open application"
+msgstr "Sonraki açık uygulamaya geç"
+
+msgid "Switch to the previous open application"
+msgstr "Önceki açık uygulamaya geç"
+
+msgid "Open Task Manager"
+msgstr "Görev Yöneticisi’ni aç"
+
+msgid "Open clipboard history"
+msgstr "Pano geçmişini aç"
+
+msgid "Open the emoji panel"
+msgstr "Emoji panelini aç"
+
+msgid "Create a virtual desktop"
+msgstr "Sanal masaüstü oluştur"
+
+msgid "Switch to the next virtual desktop"
+msgstr "Sonraki sanal masaüstüne geç"
+
+msgid "Switch to the previous virtual desktop"
+msgstr "Önceki sanal masaüstüne geç"
+
+msgid "Snap the window to the left"
+msgstr "Pencereyi sola yasla"
+
+msgid "Snap the window to the right"
+msgstr "Pencereyi sağa yasla"
+
+msgid "Maximize the active window"
+msgstr "Etkin pencereyi büyüt"
+
+msgid "Restore or minimize the active window"
+msgstr "Etkin pencereyi geri yükle veya küçült"
+
+msgid "Close the active window"
+msgstr "Etkin pencereyi kapat"
+
+msgid "Move to the next tab"
+msgstr "Sonraki sekmeye geç"
+
+msgid "Move to the previous tab"
+msgstr "Önceki sekmeye geç"
+
+msgid "Focus the address bar in File Explorer"
+msgstr "Dosya Gezgini’nde adres çubuğuna odaklan"
+
+msgid "Open the parent folder in File Explorer"
+msgstr "Dosya Gezgini’nde üst klasörü aç"
+
+msgid "Space"
+msgstr "Boşluk"
+
+msgid "Escape"
+msgstr "Esc"
+
+msgid "Backspace"
+msgstr "Geri Al"
+
+msgid "Delete"
+msgstr "Sil"
+
+msgid "Insert"
+msgstr "Insert"
+
+msgid "Home"
+msgstr "Başa Git"
+
+msgid "End"
+msgstr "Sona Git"
+
+msgid "Page Up"
+msgstr "Sayfa Yukarı"
+
+msgid "Page Down"
+msgstr "Sayfa Aşağı"
+
+msgid "Left Arrow"
+msgstr "Sol Ok"
+
+msgid "Right Arrow"
+msgstr "Sağ Ok"
+
+msgid "Up Arrow"
+msgstr "Yukarı Ok"
+
+msgid "Down Arrow"
+msgstr "Aşağı Ok"
+
+msgid "Select modifiers if needed."
+msgstr "Gerekiyorsa Ctrl, Shift veya diğer değiştirici tuşları seçin."
+
+msgid "Main key. Choose a key or type one letter or digit."
+msgstr "Ana tuş. Bir tuş seçin veya bir harf ya da rakam yazın."
+
+msgid "Choose one main key or type one letter or digit."
+msgstr "Bir ana tuş seçin veya bir harf ya da rakam yazın."
+
+msgid "Choose a Windows shortcut"
+msgstr "Windows kısayolu seçin"
+
+msgid "Available actions"
+msgstr "Kullanılabilir eylemler"
+
+msgid "Set keyboard shortcut…"
+msgstr "Klavye kısayolunu ayarla…"
+
+msgid "Choose application…"
+msgstr "Uygulama seç…"
+
+msgid "Test and save the gesture"
+msgstr "Hareketi dene ve kaydet"
+
+msgid "Assigned action: {action}"
+msgstr "Atanan eylem {action}"
+
+msgid "Save gesture"
+msgstr "Hareketi kaydet"

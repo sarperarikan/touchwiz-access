@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="tr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TouchWiz Access kullanım kılavuzu</title>
+	<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+	<a class="skip" href="#main">Ana içeriğe geç</a>
+	<header class="hero">
+		<div class="wrap">
+			<div>
+				<a href="../en/readme.html" hreflang="en" lang="en">English guide</a>
+				<h1>TouchWiz Access kullanım kılavuzu</h1>
+				<p>NVDA ile Windows Precision Touchpad üzerinden öğe türüne göre gezinin, öğeleri etkinleştirin ve açık pencereler arasında geçin.</p>
+			</div>
+			<div class="touchpad" aria-hidden="true"></div>
+		</div>
+	</header>
+	<div class="wrap">
+		<nav class="contents" aria-labelledby="contents-title">
+			<h2 id="contents-title">İçindekiler</h2>
+			<ul>
+				<li><a href="#start">Kurulum ve başlatma</a></li>
+				<li><a href="#gestures">Temel hareketler</a></li>
+				<li><a href="#rotor">Rotor ve öğe türleri</a></li>
+				<li><a href="#settings">Ayarlar ve profiller</a></li>
+				<li><a href="#wizard">Hareket sihirbazı</a></li>
+				<li><a href="#help">Sorun giderme</a></li>
+				<li><a href="#about">Hakkında</a></li>
+			</ul>
+		</nav>
+		<main id="main" tabindex="-1">
+			<section id="start">
+				<h2>Kurulum ve başlatma</h2>
+				<p>TouchWiz Access, NVDA 2026.1 ve üzeri ile uyumlu bir Windows Precision Touchpad gerektirir.</p>
+				<ol>
+					<li><code>touchwiz-access.nvda-addon</code> paketini açın ve kurulumu onaylayın.</li>
+					<li>NVDA’yı yeniden başlatın.</li>
+					<li><kbd>NVDA+Alt+Shift+T</kbd> tuşlarına basıp dokunmatik yüzeyle dolaşımın açıldığını bildiren anonsu dinleyin. Aynı kısayol dolaşımı kapatır.</li>
+				</ol>
+				<p>TouchWiz açıkken desteklenen Windows dokunma, kaydırma, yakınlaştırma ve üç veya dört parmak sistem hareketleri geçici olarak duraklatılır. TouchWiz kapandığında önceki ayarlar geri yüklenir. Duraklatma kullanılamıyorsa TouchWiz açılırken bunu bildirir.</p>
+			</section>
+			<section id="gestures">
+				<h2>Temel hareketler</h2>
+				<dl class="gestures">
+					<dt>Bir parmakla sağa veya sola kaydırma</dt>
+					<dd>Seçili türde sırasıyla sonraki veya önceki öğeye gider. Varsayılan dolaşımda sağa kaydırma Aşağı Ok, sola kaydırma Yukarı Ok işlevi görür.</dd>
+					<dt>Bir parmakla aşağı veya yukarı kaydırma</dt>
+					<dd>Varsayılan dolaşımda sırasıyla <kbd>Tab</kbd> ve <kbd>Shift+Tab</kbd> işlevi görür.</dd>
+					<dt>Baş ve işaret parmağıyla rotor dönüşü</dt>
+					<dd>Şişe kapağı çevirir gibi saat yönünde döndürerek sonraki türü, ters yönde döndürerek önceki türü seçin. Sonraki dönüşten önce iki parmağınızı kaldırın.</dd>
+					<dt>Bir parmakla çift dokunma</dt>
+					<dd>Geçerli öğede <kbd>Enter</kbd> tuşunu çalıştırır. Windows 11 24H2 ve sonraki sürümlerde desteklenir.</dd>
+					<dt>Üç parmakla soldan sağa kaydırma</dt>
+					<dd>Windows’un pencere dolaşımında sonraki açık pencereye geçer. Klavye karşılığı <kbd>Alt+Esc</kbd> tuşlarıdır.</dd>
+					<dt>Üç parmakla sağdan sola kaydırma</dt>
+					<dd>Windows’un pencere dolaşımında önceki açık pencereye geçer. Klavye karşılığı <kbd>Alt+Shift+Esc</kbd> tuşlarıdır.</dd>
+				</dl>
+				<p>Pencere değiştirmek için üç parmağınızı birlikte hareket ettirip kaldırın. Her kaydırma bir geçiş yapar. Pencere sırasını Windows belirler. Küçültülmüş bir pencereyi geri yüklemek için <kbd>Alt+Tab</kbd> kullanabilirsiniz. Geçişten sonra tek parmak hareketleri etkin pencereye uygulanır.</p>
+			</section>
+			<section id="rotor">
+				<h2>Rotor ve öğe türleri</h2>
+				<h3>Tarama kipini destekleyen belgeler</h3>
+				<p>Rotoru örneğin <strong>Metin alanları</strong> anonsuna kadar döndürün. Sağa kaydırma <kbd>E</kbd>, sola kaydırma <kbd>Shift+E</kbd> komutunu çalıştırır. NVDA’nın tarama imleci etkin belgede hareket eder. Öğeyi etkinleştirmek istediğinizde çift dokunun. Yazı yazdıktan sonra gezinme hareketi tarama kipine döner.</p>
+				<p>Sağa kaydırma aşağıdaki tuşun, sola kaydırma aynı tuşun Shift ile kullanılan komutunu çalıştırır.</p>
+				<ul>
+					<li>Metin alanları <kbd>E</kbd>, düğmeler <kbd>B</kbd>, bağlantılar <kbd>K</kbd>, form alanları <kbd>F</kbd>, sınır imleri <kbd>D</kbd>.</li>
+					<li>Başlıklar <kbd>H</kbd>, başlık düzeyleri <kbd>1</kbd> ile <kbd>9</kbd> arası, listeler <kbd>L</kbd>, liste öğeleri <kbd>I</kbd>, tablolar <kbd>T</kbd>.</li>
+					<li>Onay kutuları <kbd>X</kbd>, seçenek düğmeleri <kbd>R</kbd>, açılır kutular <kbd>C</kbd>, ziyaret edilen bağlantılar <kbd>V</kbd>, ziyaret edilmeyen bağlantılar <kbd>U</kbd>.</li>
+					<li>Bağlantı dışındaki metin <kbd>N</kbd>, blok alıntılar <kbd>Q</kbd>, ayırıcılar <kbd>S</kbd>, çerçeveler <kbd>M</kbd>, görseller <kbd>G</kbd>.</li>
+					<li>Gömülü nesneler <kbd>O</kbd>, açıklamalar <kbd>A</kbd>, metin paragrafları <kbd>P</kbd>, yazım hataları <kbd>W</kbd>.</li>
+				</ul>
+				<h3>Windows uygulamaları ve Dosya Gezgini</h3>
+				<p><strong>Klavye odağı</strong> seçiliyken sağa ve sola kaydırma <kbd>Tab</kbd> ve <kbd>Shift+Tab</kbd> işlevi görür. <strong>Ok tuşları</strong> seçiliyken kaydırma yönü ilgili ok tuşuna karşılık gelir. <strong>Dosya Gezgini sekmeleri</strong> seçiliyken <kbd>Ctrl+Tab</kbd> ve <kbd>Ctrl+Shift+Tab</kbd> kullanılır.</p>
+				<p>Metin alanları, düğmeler, bağlantılar, form alanları, onay kutuları, açılır kutular, listeler, liste öğeleri, ağaç görünümleri, ağaç öğeleri, tablolar, tablo satırları, tablo hücreleri ve araç çubukları arasından seçim yapabilirsiniz. Klavye odağı etkin penceredeki uygun denetimlere gider. Kapsayıcı odak alamıyorsa ilk uygun alt öğesi kullanılır. Eşleşmeler uygulamanın erişilebilirlik desteğine bağlıdır.</p>
+				<p>Genel hareketlere dönmek için rotorla <strong>Varsayılan dolaşım</strong> seçeneğini bulun.</p>
+			</section>
+			<section id="settings">
+				<h2>Ayarlar ve profiller</h2>
+				<p>NVDA menüsünde <strong>Tercihler → TouchWiz Access</strong> öğesini açın. Sekmeler arasında <kbd>Ctrl+Tab</kbd>, denetimler arasında <kbd>Tab</kbd> ile ilerleyebilirsiniz.</p>
+				<ul>
+					<li><strong>Genel.</strong> Açma kısayolunu ve arayüz ile kılavuzun dilini seçin. <strong>NVDA’nın dilini kullan</strong> seçiliyken TouchWiz NVDA’nın dilini kullanır. Türkçe ve İngilizce pakete dahildir. Diğer diller için İngilizce açılır.</li>
+					<li><strong>Kullanım kılavuzunu aç</strong> düğmesi Genel sekmesinde seçili dildeki çevrimdışı kılavuzu tarayıcıda açar. Arayüz dilini değiştirmek için <strong>Tamam</strong> ile kaydedip ayarları yeniden açın.</li>
+					<li><strong>Hareket özelleştirmeleri.</strong> Genel varsayılanları seçin veya örneğin <code>notepad.exe</code> için bir profil ekleyin. Bir hareketi seçip <strong>Eylem ata</strong> düğmesini kullanın. Uygulama profili varsa o uygulamada kendi atamaları önceliklidir. Üç parmak hareketlerini de yeniden atayabilir veya devre dışı bırakabilirsiniz.</li>
+					<li><strong>Ayarlar ve düzenler.</strong> Genel sekmesinden ayarları, özel hareketleri ve uygulama profillerini bir JSON dosyasına aktarabilir veya bu dosyayı içe alabilirsiniz. İçe aktarılan ayarları <strong>Tamam</strong> ile kaydedin.</li>
+				</ul>
+			</section>
+			<section id="wizard">
+				<h2>Hareket sihirbazı</h2>
+				<ol>
+					<li><strong>Hareket oluştur → Hareket sihirbazını başlat</strong> seçeneğini açın. Algılayıcı kayıt sayfasında otomatik açılır.</li>
+					<li>Bir ila beş parmakla kaydırın, bir, iki veya üç kez dokunun ya da tek parmakla kesintisiz bir şekil çizin. Örneğin sonunda tüm parmaklarınızı kaldırın. Desteklenen parmak sayısı donanıma bağlıdır.</li>
+					<li>İlk örnek anons edildikten sonra <strong>İleri</strong> ile ilerleyip aynı hareketi tekrarlayın. Sihirbaz örnekleri karşılaştırır ve yerleşik bir hareketle çakışıyorsa onay ister.</li>
+					<li>Hareketi adlandırın, genel veya uygulamaya özel profili seçin. <strong>NVDA eylemi</strong> ve <strong>Windows kısayolu</strong> için hazır listeler kullanılır. <strong>Klavye kısayolu</strong> için değiştiricileri ve ana tuşu seçin. <strong>Uygulama aç</strong> için bir çalıştırılabilir dosya seçin.</li>
+					<li>Son adımda hareketi tekrar yaparak algılamayı deneyin ve <strong>Hareketi kaydet</strong> düğmesini kullanın. Ayarlar penceresini <strong>Tamam</strong> ile kapatın. Hedef uygulamada deneme seçeneğini işaretlediyseniz uygulamaya geçip hareketi 30 saniye içinde yapın.</li>
+				</ol>
+			</section>
+			<section id="help">
+				<h2>Sorun giderme</h2>
+				<ul>
+					<li><strong>Hareket algılanmıyor.</strong> TouchWiz’in açık olduğunu kontrol edin. Parmaklarınızı aynı yönde birlikte kaydırın ve her denemeden sonra kaldırın. Üç parmak kaydırması için yatay yönde başlayın.</li>
+					<li><strong>Üç parmak hareketi başka bir eylem yapıyor.</strong> Etkin uygulamanın profilini ve genel atamaları denetleyin. TouchWiz açılırken Windows hareketlerinin duraklatılamadığı anons edildiyse Windows’un dokunmatik yüzey ayarlarını da kontrol edin.</li>
+					<li><strong>Seçili türde öğe bulunmuyor.</strong> Etkin pencerenin ve rotor türünün doğru olduğunu kontrol edin. Belgede klavyeyle de aynı hızlı dolaşım tuşunu deneyin. Uygulamada genel hareketlere dönmek için <strong>Varsayılan dolaşım</strong> türünü seçin.</li>
+				</ul>
+				<p>Standart tarama komutları <a href="https://download.nvaccess.org/releases/2026.1/documentation/tr/userGuide.html#SingleLetterNavigation">NVDA 2026.1 hızlı dolaşım kılavuzunda</a> açıklanır.</p>
+			</section>
+			<section id="about">
+				<h2>Hakkında</h2>
+				<p>TouchWiz Access, <strong>Sarper Arıkan</strong> tarafından agentic mühendislikle geliştirildi.</p>
+				<ul>
+					<li><a href="mailto:sarperarikan@gmail.com">Sarper Arıkan’a e-posta gönder (sarperarikan@gmail.com)</a></li>
+					<li><a href="https://sarperarikan.net">Kişisel web sitesi (sarperarikan.net)</a></li>
+					<li><a href="https://erisilebilirai.com">Erişilebilir AI (erisilebilirai.com)</a></li>
+					<li><a href="https://uygulamaakademisi.com">Uygulama Akademisi (uygulamaakademisi.com)</a></li>
+					<li><a href="https://github.com/sarperarikan">Sarper Arıkan’ın GitHub profili (sarperarikan)</a></li>
+				</ul>
+			</section>
+		</main>
+	</div>
+</body>
+</html>

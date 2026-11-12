@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TouchWiz Access user guide</title>
+	<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+	<a class="skip" href="#main">Skip to main content</a>
+	<header class="hero">
+		<div class="wrap">
+			<div>
+				<a href="../tr/readme.html" hreflang="tr" lang="tr">Türkçe kılavuz</a>
+				<h1>TouchWiz Access user guide</h1>
+				<p>Use a Windows Precision Touchpad with NVDA to navigate by element type, activate controls and switch between open windows.</p>
+			</div>
+			<div class="touchpad" aria-hidden="true"></div>
+		</div>
+	</header>
+	<div class="wrap">
+		<nav class="contents" aria-labelledby="contents-title">
+			<h2 id="contents-title">Contents</h2>
+			<ul>
+				<li><a href="#start">Installation and startup</a></li>
+				<li><a href="#gestures">Basic gestures</a></li>
+				<li><a href="#rotor">Rotor and element types</a></li>
+				<li><a href="#settings">Settings and profiles</a></li>
+				<li><a href="#wizard">Gesture wizard</a></li>
+				<li><a href="#help">Troubleshooting</a></li>
+				<li><a href="#about">About</a></li>
+			</ul>
+		</nav>
+		<main id="main" tabindex="-1">
+			<section id="start">
+				<h2>Installation and startup</h2>
+				<p>TouchWiz Access requires NVDA 2026.1 or later and a compatible Windows Precision Touchpad.</p>
+				<ol>
+					<li>Open the <code>touchwiz-access.nvda-addon</code> package and confirm installation.</li>
+					<li>Restart NVDA.</li>
+					<li>Press <kbd>NVDA+Alt+Shift+T</kbd> and listen for the announcement that touchpad navigation is on. Press the same shortcut to turn it off.</li>
+				</ol>
+				<p>While TouchWiz is on, supported Windows tap, scroll, zoom, and three- and four-finger system gestures are temporarily suspended. TouchWiz restores the previous settings when it turns off. TouchWiz announces at startup if suspension is unavailable.</p>
+			</section>
+			<section id="gestures">
+				<h2>Basic gestures</h2>
+				<dl class="gestures">
+					<dt>Swipe right or left with one finger</dt>
+					<dd>Go to the next or previous item of the selected type. In Default navigation, swiping right sends Down Arrow and swiping left sends Up Arrow.</dd>
+					<dt>Swipe down or up with one finger</dt>
+					<dd>In Default navigation, these gestures send <kbd>Tab</kbd> and <kbd>Shift+Tab</kbd> respectively.</dd>
+					<dt>Turn the rotor with your thumb and index finger</dt>
+					<dd>Turn clockwise as if twisting a bottle cap to select the next type. Turn counterclockwise to select the previous type. Lift both fingers before turning again.</dd>
+					<dt>Double-tap with one finger</dt>
+					<dd>Send <kbd>Enter</kbd> to the current item. This gesture is supported on Windows 11 24H2 and later.</dd>
+					<dt>Swipe from left to right with three fingers</dt>
+					<dd>Go to the next open window in the Windows window order. The keyboard equivalent is <kbd>Alt+Esc</kbd>.</dd>
+					<dt>Swipe from right to left with three fingers</dt>
+					<dd>Go to the previous open window in the Windows window order. The keyboard equivalent is <kbd>Alt+Shift+Esc</kbd>.</dd>
+				</dl>
+				<p>Move three fingers together and lift them to switch windows. Each swipe makes one switch. Windows determines the order. You can use <kbd>Alt+Tab</kbd> to restore a minimized window. After switching, one-finger gestures apply to the active window.</p>
+			</section>
+			<section id="rotor">
+				<h2>Rotor and element types</h2>
+				<h3>Documents that support browse mode</h3>
+				<p>Turn the rotor until NVDA says <strong>Text fields</strong>, for example. Swipe right to run <kbd>E</kbd> or left to run <kbd>Shift+E</kbd>. The NVDA browse cursor moves in the active document. Double-tap when you want to activate the current item. After typing, a navigation gesture returns to browse mode.</p>
+				<p>Swipe right to use the key listed below. Swipe left to use the corresponding Shift command.</p>
+				<ul>
+					<li>Text fields <kbd>E</kbd>, buttons <kbd>B</kbd>, links <kbd>K</kbd>, form fields <kbd>F</kbd>, landmarks <kbd>D</kbd>.</li>
+					<li>Headings <kbd>H</kbd>, heading levels <kbd>1</kbd> through <kbd>9</kbd>, lists <kbd>L</kbd>, list items <kbd>I</kbd>, tables <kbd>T</kbd>.</li>
+					<li>Checkboxes <kbd>X</kbd>, radio buttons <kbd>R</kbd>, combo boxes <kbd>C</kbd>, visited links <kbd>V</kbd>, unvisited links <kbd>U</kbd>.</li>
+					<li>Text outside links <kbd>N</kbd>, block quotes <kbd>Q</kbd>, separators <kbd>S</kbd>, frames <kbd>M</kbd>, images <kbd>G</kbd>.</li>
+					<li>Embedded objects <kbd>O</kbd>, annotations <kbd>A</kbd>, text paragraphs <kbd>P</kbd>, spelling errors <kbd>W</kbd>.</li>
+				</ul>
+				<h3>Windows apps and File Explorer</h3>
+				<p>In <strong>Keyboard focus</strong>, swiping right and left sends <kbd>Tab</kbd> and <kbd>Shift+Tab</kbd>. In <strong>Arrow keys</strong>, the swipe direction matches the arrow key. In <strong>File Explorer tabs</strong>, swiping right and left sends <kbd>Ctrl+Tab</kbd> and <kbd>Ctrl+Shift+Tab</kbd>.</p>
+				<p>You can also select text fields, buttons, links, form fields, checkboxes, combo boxes, lists, list items, tree views, tree items, tables, table rows, table cells and toolbars. Keyboard focus moves among matching controls in the active window. When a container cannot take focus, its first eligible child is used. Matches depend on the app’s accessibility support.</p>
+				<p>To return to the general gestures, use the rotor to select <strong>Default navigation</strong>.</p>
+			</section>
+			<section id="settings">
+				<h2>Settings and profiles</h2>
+				<p>Open <strong>Preferences → TouchWiz Access</strong> from the NVDA menu. Use <kbd>Ctrl+Tab</kbd> to change tabs and <kbd>Tab</kbd> to move among controls.</p>
+				<ul>
+					<li><strong>General.</strong> Choose the activation shortcut and the language for the interface and guide. <strong>Follow NVDA</strong> uses the NVDA language. Turkish and English are included. English is used for other languages.</li>
+					<li><strong>Open user guide</strong> in the General tab opens the offline guide in your browser using the selected language. To change the interface language, save with <strong>OK</strong> and reopen settings.</li>
+					<li><strong>Gesture customization.</strong> Choose Global defaults or add a profile for an app such as <code>notepad.exe</code>. Select a gesture and choose <strong>Assign action</strong>. An application’s own assignments take priority while it is active. You can also reassign or disable the three-finger swipes.</li>
+					<li><strong>Settings and layouts.</strong> Use the General tab to export or import settings, custom gestures and application profiles as a JSON file. Save imported settings with <strong>OK</strong>.</li>
+				</ul>
+			</section>
+			<section id="wizard">
+				<h2>Gesture wizard</h2>
+				<ol>
+					<li>Open <strong>Create a gesture → Start gesture wizard</strong>. The detector starts automatically on the recording page.</li>
+					<li>Swipe with one to five fingers, tap once, twice or three times, or draw a continuous shape with one finger. Lift all fingers at the end of the sample. The supported finger count depends on your hardware.</li>
+					<li>After the first sample is announced, select <strong>Next</strong> and repeat it. The wizard compares the samples and asks for confirmation if they match a built-in gesture.</li>
+					<li>Name the gesture and choose a global or application profile. <strong>NVDA action</strong> and <strong>Windows shortcut</strong> provide preset lists. For a <strong>Keyboard shortcut</strong>, select modifiers and a main key. To <strong>Launch an application</strong>, choose an executable file.</li>
+					<li>Repeat the gesture on the final page to test recognition, then select <strong>Save gesture</strong>. Close settings with <strong>OK</strong>. If you selected the action test, switch to the target app and perform the gesture within 30 seconds.</li>
+				</ol>
+			</section>
+			<section id="help">
+				<h2>Troubleshooting</h2>
+				<ul>
+					<li><strong>A gesture is not detected.</strong> Check that TouchWiz is on. Move your fingers together and lift them after each attempt. For a three-finger swipe, start in a horizontal direction.</li>
+					<li><strong>A three-finger swipe performs another action.</strong> Check the active application profile and the global assignments. If TouchWiz announced that Windows gestures could not be suspended, check the Windows touchpad settings as well.</li>
+					<li><strong>No item of the selected type is found.</strong> Check the active window and the selected rotor type. In a document, try the corresponding keyboard quick navigation command. Select <strong>Default navigation</strong> to return to general gestures.</li>
+				</ul>
+				<p>See the <a href="https://download.nvaccess.org/releases/2026.1/documentation/en/userGuide.html#SingleLetterNavigation">NVDA 2026.1 quick navigation guide</a> for standard browse mode commands.</p>
+			</section>
+			<section id="about">
+				<h2>About</h2>
+				<p>TouchWiz Access was developed by <strong>Sarper Arıkan</strong> using agentic engineering.</p>
+				<ul>
+					<li><a href="mailto:sarperarikan@gmail.com">Email Sarper Arıkan (sarperarikan@gmail.com)</a></li>
+					<li><a href="https://sarperarikan.net">Personal website (sarperarikan.net)</a></li>
+					<li><a href="https://erisilebilirai.com">Erişilebilir AI (erisilebilirai.com)</a></li>
+					<li><a href="https://uygulamaakademisi.com">Uygulama Akademisi (uygulamaakademisi.com)</a></li>
+					<li><a href="https://github.com/sarperarikan">Sarper Arıkan on GitHub (sarperarikan)</a></li>
+				</ul>
+			</section>
+		</main>
+	</div>
+</body>
+</html>
