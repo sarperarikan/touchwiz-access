@@ -2,7 +2,7 @@
 
 TouchWiz Access is an experimental NVDA add-on for navigating Windows with a laptop's Precision Touchpad. It requires NVDA 2026.1 or later and a compatible touchpad. Gesture detection and the supported finger count can vary by device.
 
-[Download the v0.3.10 preview](https://github.com/sarperarikan/touchwiz-access/releases/tag/v0.3.10) · [English guide](doc/en/readme.html) · [Türkçe kılavuz](doc/tr/readme.html)
+[Download the v0.3.11 preview](https://github.com/sarperarikan/touchwiz-access/releases/tag/v0.3.11) · [English guide](doc/en/readme.html) · [Türkçe kılavuz](doc/tr/readme.html)
 
 ## Getting started
 
@@ -18,7 +18,7 @@ Open **NVDA → Preferences → TouchWiz Access** to configure gestures, create 
 
 TouchWiz Access, Windows dizüstü bilgisayarlarda dokunmatik yüzeyle gezinmek için geliştirilmiş deneysel bir NVDA eklentisidir. NVDA 2026.1 veya üzeri ve uyumlu bir Windows Precision Touchpad gerektirir. Hareket algılama ve desteklenen parmak sayısı cihaza göre değişebilir.
 
-1. [Sürüm sayfasından](https://github.com/sarperarikan/touchwiz-access/releases/tag/v0.3.10) `touchwiz-access.nvda-addon` dosyasını indirip açın. Kurulumu onaylayıp NVDA’yı yeniden başlatın.
+1. [Sürüm sayfasından](https://github.com/sarperarikan/touchwiz-access/releases/tag/v0.3.11) `touchwiz-access.nvda-addon` dosyasını indirip açın. Kurulumu onaylayıp NVDA’yı yeniden başlatın.
 2. `NVDA+Alt+Shift+T` ile dokunmatik yüzeyle gezinmeyi açın veya kapatın.
 3. Baş ve işaret parmağınızı şişe kapağı çevirir gibi döndürerek bir öğe türü seçin. Tek parmakla sağa ya da sola kaydırarak bu türdeki sonraki veya önceki öğeye gidin.
 
