@@ -48,6 +48,11 @@ _TAP_MAX_SECONDS = 0.22
 _TAP_MAX_TRAVEL = 0.035
 _DOUBLE_TAP_SECONDS = 0.4
 _MODIFIERS = (winUser.VK_SHIFT, winUser.VK_CONTROL, winUser.VK_MENU, winUser.VK_LWIN, winUser.VK_RWIN)
+_BUILT_IN_TAPS = {
+	(1, "doubletap"): "doubletap",
+	(3, "doubletap"): "threeFingerDoubleTap",
+	(3, "tripletap"): "threeFingerTripleTap",
+}
 
 
 @dataclass(frozen=True)
@@ -503,6 +508,35 @@ class _PointerHold:
 			self._bounds = None
 
 
+def _feedStroke(receiver, device, frame, active, buttonDown, now, direction):
+	stroke = getattr(device, "stroke", None)
+	strokeHandler = receiver.strokeHandler
+	started = stroke.started if stroke is not None else None
+	sample = None
+	if stroke is not None and (strokeHandler or frame.count >= 3 or started is not None):
+		sample = stroke.feed(frame, device.aspect, buttonDown, now)
+	recording = getattr(receiver, "recording", False)
+	if sample is not None:
+		pattern = sample.pattern
+		inWindow = device.foreground == winUser.getForegroundWindow()
+		if isinstance(pattern, dict) and pattern["gesture"] == "tap":
+			if (strokeHandler or pattern["fingers"] == 3) and inWindow:
+				TouchpadInput._queueTap(receiver, device, pattern["fingers"], started, now)
+			else:
+				device.customTaps = None
+			return None
+		device.customTaps = None
+		if isinstance(pattern, dict) and pattern["fingers"] == 3:
+			direction = APP_SWITCH_GESTURES.get(pattern["gesture"], direction)
+		if strokeHandler and inWindow:
+			direction = strokeHandler(pattern, direction, sample.drawing) or direction
+	elif recording and strokeHandler and active and not device.recognizer.inContact:
+		if device.foreground == winUser.getForegroundWindow():
+			device.customTaps = None
+			strokeHandler(None, None, None)
+	return None if recording else direction
+
+
 class TouchpadInput(CustomWindow):
 	className = "TouchWizAccessInput"
 
@@ -725,6 +759,8 @@ class TouchpadInput(CustomWindow):
 		direction = recognizer.feed(
 			frame, now, self.fastHorizontal and not strokeHandler, self.tapActivation and not strokeHandler
 		)
+		if buttonDown or direction:
+			device.customTaps = None
 		if recognizer.inContact and not active:
 			if not buttonDown:
 				self._pointerHold.start()
@@ -748,69 +784,67 @@ class TouchpadInput(CustomWindow):
 				direction = self._pairTap(device, now)
 			elif buttonDown or frame.count > 1 or direction or (active and not recognizer.inContact):
 				device.lastTap = None
-		stroke = getattr(device, "stroke", None)
-		sample = None
-		if stroke is not None and (strokeHandler or frame.count >= 3 or stroke.started is not None):
-			sample = stroke.feed(frame, device.aspect, buttonDown, now)
-		if sample is not None and isinstance(sample.pattern, dict) and sample.pattern["fingers"] == 3:
-			direction = APP_SWITCH_GESTURES.get(sample.pattern["gesture"], direction)
-		if strokeHandler:
-			if device.foreground == winUser.getForegroundWindow():
-				if sample is not None:
-					if isinstance(sample.pattern, dict) and sample.pattern["gesture"] == "tap":
-						self._queueTap(device, sample.pattern["fingers"])
-						direction = None
-					else:
-						device.customTaps = None
-						direction = strokeHandler(sample.pattern, direction, sample.drawing) or direction
-				elif self.recording and active and not recognizer.inContact:
-					device.customTaps = None
-					strokeHandler(None, None, None)
-			if self.recording:
-				direction = None
+		direction = _feedStroke(self, device, frame, active, buttonDown, now, direction)
 		if direction and device.foreground is not None:
 			wx.CallAfter(self._dispatch, direction, self._generation, device.foreground, device.document)
 		if not recognizer.inContact:
 			device.foreground = None
 			device.document = None
 
-	def _queueTap(self, device, fingers):
+	def _queueTap(self, device, fingers, started=None, now=None):
 		scope = (device.foreground, device.document, self._generation)
 		previous = getattr(device, "customTaps", None)
-		now = monotonic()
+		if now is None:
+			now = monotonic()
+		touchStart = now if started is None else started
 		repetitions = 1
 		if (
 			previous
 			and previous[0] == scope
 			and previous[1] == fingers
 			and previous[2] < 3
-			and now - previous[3] <= TAP_SERIES_MS / 1000
+			and touchStart - previous[3] <= TAP_SERIES_MS / 1000
 		):
 			repetitions = previous[2] + 1
 		pending = (scope, fingers, repetitions, now)
 		device.customTaps = pending
-		wx.CallLater(0 if repetitions == 3 else TAP_SERIES_MS, self._finishTaps, device, pending)
+		callback = getattr(self, "_finishTaps", None) or (
+			lambda dev, item: TouchpadInput._finishTaps(self, dev, item)
+		)
+		wx.CallLater(0 if repetitions == 3 else TAP_SERIES_MS, callback, device, pending)
 
 	def _finishTaps(self, device, pending):
 		if not self.handle or getattr(device, "customTaps", None) is not pending:
 			return
-		(foreground, document, generation), fingers, repetitions, _ = pending
+		(foreground, document, generation), fingers, repetitions, lastTapAt = pending
 		if (
 			generation != self._generation
 			or foreground != winUser.getForegroundWindow()
 			or document is not getDocument()
-			or self.strokeHandler is None
+			or (self.strokeHandler is None and fingers != 3)
 		):
 			device.customTaps = None
 			return
 		if device.recognizer.inContact:
-			wx.CallLater(60, self._finishTaps, device, pending)
+			if monotonic() - lastTapAt <= _POINTER_HOLD_TIMEOUT_MS / 1000:
+				callback = getattr(self, "_finishTaps", None) or (
+					lambda dev, item: TouchpadInput._finishTaps(self, dev, item)
+				)
+				wx.CallLater(60, callback, device, pending)
+			else:
+				device.customTaps = None
 			return
 		device.customTaps = None
 		gesture = ("tap", "doubletap", "tripletap")[repetitions - 1]
-		builtIn = "doubletap" if fingers == 1 and repetitions == 2 else None
-		direction = self.strokeHandler({"fingers": fingers, "gesture": gesture}, builtIn, None)
-		if not self.recording and (direction or (builtIn and self.tapActivation)):
+		builtIn = _BUILT_IN_TAPS.get((fingers, gesture))
+		direction = (
+			self.strokeHandler({"fingers": fingers, "gesture": gesture}, builtIn, None)
+			if self.strokeHandler
+			else None
+		)
+		if not getattr(self, "recording", False) and (
+			direction or (builtIn and (builtIn != "doubletap" or getattr(self, "tapActivation", False)))
+		):
 			self._dispatch(direction or builtIn, generation, foreground, document)
 
 	@staticmethod
@@ -854,7 +888,7 @@ class TouchpadInput(CustomWindow):
 							continue
 					if (
 						direction.startswith("swipe")
-						or direction == "doubletap"
+						or direction in _BUILT_IN_TAPS.values()
 						or direction in APP_SWITCH_GESTURES.values()
 					):
 						self._rotorQuietUntil = 0.0

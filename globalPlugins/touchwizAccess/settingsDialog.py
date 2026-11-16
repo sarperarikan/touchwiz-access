@@ -20,9 +20,11 @@ from .localization import LANGUAGES, guidePath
 from .preferences import ACTION_KINDS, DEFAULT_KEY, GESTURES, appKey, readSettings, writeSettings
 from .shortcutChoices import WINDOWS_SHORTCUTS, KeyboardShortcutDialog, shortcutLabel
 
-_APP_SWITCH_LABELS = {
+_DEFAULT_LABELS = {
 	"threeFingerSwipeRight": "Switch to the next open window",
 	"threeFingerSwipeLeft": "Switch to the previous open window",
+	"threeFingerDoubleTap": "Copy",
+	"threeFingerTripleTap": "Paste",
 }
 
 
@@ -176,9 +178,7 @@ class TouchWizSettingsDialog(wx.Dialog):
 					description += " " + self.t("(inherited)")
 			else:
 				description = self.t(
-					_APP_SWITCH_LABELS.get(
-						gesture, "Unassigned" if gesture in custom else "Built-in behavior"
-					)
+					_DEFAULT_LABELS.get(gesture, "Unassigned" if gesture in custom else "Built-in behavior")
 				)
 			rows.append(f"{name} — {description}")
 		self.gestures.SetItems(rows)

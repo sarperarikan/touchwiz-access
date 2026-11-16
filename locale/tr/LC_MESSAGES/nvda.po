@@ -618,3 +618,21 @@ msgstr "Atanan eylem {action}"
 
 msgid "Save gesture"
 msgstr "Hareketi kaydet"
+
+msgid "Three-finger double tap"
+msgstr "Üç parmakla çift dokunma"
+
+msgid "Three-finger triple tap"
+msgstr "Üç parmakla üç kez dokunma"
+
+msgid "Copy"
+msgstr "Kopyala"
+
+msgid "Paste"
+msgstr "Yapıştır"
+
+msgid "Content copied"
+msgstr "İçerik kopyalandı"
+
+msgid "Content pasted"
+msgstr "İçerik yapıştırıldı"

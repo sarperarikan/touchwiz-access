@@ -24,7 +24,7 @@ from speech.priorities import Spri
 from utils.security import isLockScreenModeActive, isRunningOnSecureDesktop, post_sessionLockStateChanged
 
 from .actions import runAction
-from .localization import ADDON_ROOT
+from .localization import ADDON_ROOT, localeCodes
 from .preferences import DEFAULT_KEY, GESTURES, Settings, appKey, effectiveBindings
 from .rotor import Rotor, getDocument, windowModes
 from .shellGestures import ShellGestureOverride
@@ -36,6 +36,15 @@ addonHandler.initTranslation()
 
 _SWIPE_KEYS = {"swiperight": "downArrow", "swipeleft": "upArrow", "swipeup": "shift+tab", "swipedown": "tab"}
 _APP_SWITCH_KEYS = {"threeFingerSwipeRight": "alt+escape", "threeFingerSwipeLeft": "alt+shift+escape"}
+_TAP_KEYS = {
+	"doubletap": "enter",
+	"threeFingerDoubleTap": "control+c",
+	"threeFingerTripleTap": "control+v",
+}
+_TAP_MESSAGES = {
+	"threeFingerDoubleTap": "Content copied",
+	"threeFingerTripleTap": "Content pasted",
+}
 _ROTOR_ANNOUNCEMENT_DELAY_MS = 35
 _MODE_LABELS = {
 	"default": "Default navigation",
@@ -72,6 +81,14 @@ _MODE_LABELS = {
 	"error": "Spelling errors",
 	**{f"heading{level}": f"Level {level} headings" for level in range(1, 10)},
 }
+
+
+class _TapKeyGesture(KeyboardInputGesture):
+	def _get_shouldReportAsCommand(self):
+		return False
+
+	def _get_speechEffectWhenExecuted(self):
+		return None
 
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
@@ -120,13 +137,17 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		super().terminate()
 
 	def translator(self, language=None):
-		language = language or self.settings.data["language"]
-		if language == "auto":
+		selected = language or self.settings.data["language"]
+		codes = localeCodes(selected)
+		localeDir = ADDON_ROOT / "locale"
+		if selected == "auto" and not any(
+			(localeDir / code / "LC_MESSAGES" / "nvda.mo").is_file() for code in codes
+		):
 			return _
 		return translation(
 			"nvda",
-			localedir=ADDON_ROOT / "locale",
-			languages=[language],
+			localedir=localeDir,
+			languages=codes,
 			fallback=True,
 		).gettext
 
@@ -364,6 +385,27 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		finally:
 			self._speakingRotor = False
 
+	def _announceFeedback(self, text):
+		self._announcement = None
+		self._speakRotorMessage(text)
+
+	def _emulateTap(self, gesture):
+		self._cancelAnnouncement()
+		speech.cancelSpeech()
+		key = _TapKeyGesture.fromName(_TAP_KEYS[gesture])
+		scriptCopy = (
+			gesture == "threeFingerDoubleTap"
+			and getattr(getattr(key, "script", None), "__name__", None) == "script_copyToClipboard"
+			and not getattr(getattr(key.script, "__self__", None), "_nativeAppSelectionMode", False)
+		)
+		inputCore.manager.emulateGesture(key)
+		if not scriptCopy and (feedback := _TAP_MESSAGES.get(gesture)):
+			self._announcement = wx.CallLater(
+				_ROTOR_ANNOUNCEMENT_DELAY_MS,
+				self._announceFeedback,
+				self._t(feedback),
+			)
+
 	def _handleGesture(self, gesture):
 		if gesture == "rotorStarted":
 			self._allowRotorActionSpeech = False
@@ -400,8 +442,8 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			self._cancelAnnouncement()
 			KeyboardInputGesture.fromName(_APP_SWITCH_KEYS[gesture]).send()
 			return
-		if gesture == "doubletap":
-			inputCore.manager.emulateGesture(KeyboardInputGesture.fromName("enter"))
+		if gesture in _TAP_KEYS:
+			self._emulateTap(gesture)
 			return
 		document = getDocument()
 		self._useBrowseMode(document)

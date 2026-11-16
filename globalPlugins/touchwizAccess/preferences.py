@@ -24,6 +24,8 @@ GESTURES = {
 	"doubletap": "Single-finger double tap",
 	"threeFingerSwipeRight": "Three-finger swipe right",
 	"threeFingerSwipeLeft": "Three-finger swipe left",
+	"threeFingerDoubleTap": "Three-finger double tap",
+	"threeFingerTripleTap": "Three-finger triple tap",
 }
 ACTION_KINDS = ("nvda", "shortcut", "windows", "app", "disabled")
 SAMPLE_COUNT = 16
