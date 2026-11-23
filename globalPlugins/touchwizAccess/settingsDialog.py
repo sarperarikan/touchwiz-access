@@ -21,6 +21,8 @@ from .preferences import ACTION_KINDS, DEFAULT_KEY, GESTURES, appKey, readSettin
 from .shortcutChoices import WINDOWS_SHORTCUTS, KeyboardShortcutDialog, shortcutLabel
 
 _DEFAULT_LABELS = {
+	"twoFingerTopDoubleTap": "Go to the beginning (Ctrl+Home)",
+	"twoFingerBottomDoubleTap": "Go to the end (Ctrl+End)",
 	"threeFingerSwipeRight": "Switch to the next open window",
 	"threeFingerSwipeLeft": "Switch to the previous open window",
 	"threeFingerDoubleTap": "Copy",

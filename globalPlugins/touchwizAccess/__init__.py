@@ -13,6 +13,7 @@ import globalVars
 import gui
 import inputCore
 import speech
+import textInfos
 import ui
 import winUser
 import wx
@@ -20,11 +21,12 @@ from browseMode import reportPassThrough
 from keyboardHandler import KeyboardInputGesture
 from logHandler import log
 from scriptHandler import script
+from speech.commands import LangChangeCommand
 from speech.priorities import Spri
 from utils.security import isLockScreenModeActive, isRunningOnSecureDesktop, post_sessionLockStateChanged
 
 from .actions import runAction
-from .localization import ADDON_ROOT, localeCodes
+from .localization import ADDON_ROOT, documentEdgeAnnouncement, localeCodes
 from .preferences import DEFAULT_KEY, GESTURES, Settings, appKey, effectiveBindings
 from .rotor import Rotor, getDocument, windowModes
 from .shellGestures import ShellGestureOverride
@@ -36,8 +38,10 @@ addonHandler.initTranslation()
 
 _SWIPE_KEYS = {"swiperight": "downArrow", "swipeleft": "upArrow", "swipeup": "shift+tab", "swipedown": "tab"}
 _APP_SWITCH_KEYS = {"threeFingerSwipeRight": "alt+escape", "threeFingerSwipeLeft": "alt+shift+escape"}
+_DOCUMENT_EDGE_KEYS = {"twoFingerTopDoubleTap": "control+home", "twoFingerBottomDoubleTap": "control+end"}
 _TAP_KEYS = {
 	"doubletap": "enter",
+	**_DOCUMENT_EDGE_KEYS,
 	"threeFingerDoubleTap": "control+c",
 	"threeFingerTripleTap": "control+v",
 }
@@ -89,6 +93,20 @@ class _TapKeyGesture(KeyboardInputGesture):
 
 	def _get_speechEffectWhenExecuted(self):
 		return None
+
+
+class _DocumentEdgeGesture(_TapKeyGesture):
+	def executeScript(self, script):
+		if winUser.getForegroundWindow() != self.foreground or getDocument() is not self.document:
+			return
+		super().executeScript(script)
+		command = "script_bottomOfDocument" if self.atEnd else "script_topOfDocument"
+		if script == getattr(self.document, command, None):
+			self.announce(self.document, self.foreground, self.atEnd)
+
+	def send(self):
+		if winUser.getForegroundWindow() == self.foreground and getDocument() is self.document:
+			super().send()
 
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
@@ -389,10 +407,41 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		self._announcement = None
 		self._speakRotorMessage(text)
 
+	def _announceDocumentEdge(self, document, foreground, atEnd):
+		if (
+			self._touchpad is None
+			or self._touchpad.recording
+			or isLockScreenModeActive()
+			or isRunningOnSecureDesktop()
+			or winUser.getForegroundWindow() != foreground
+			or getattr(api.getFocusObject(), "treeInterceptor", None) is not document
+			or not document.isReady
+		):
+			return
+		position = textInfos.POSITION_LAST if atEnd else textInfos.POSITION_FIRST
+		try:
+			caret = document.makeTextInfo(textInfos.POSITION_CARET)
+			edge = document.makeTextInfo(position)
+			if caret.compareEndPoints(edge, "startToStart") != 0:
+				return
+		except (NotImplementedError, LookupError, OSError, RuntimeError):
+			return
+		message, language = documentEdgeAnnouncement(self.settings.data["language"], atEnd, self._t)
+		speech.speak([LangChangeCommand(language), message], priority=Spri.NORMAL)
+
 	def _emulateTap(self, gesture):
 		self._cancelAnnouncement()
 		speech.cancelSpeech()
-		key = _TapKeyGesture.fromName(_TAP_KEYS[gesture])
+		document = getDocument() if gesture in _DOCUMENT_EDGE_KEYS else None
+		if document is not None:
+			self._useBrowseMode(document)
+			key = _DocumentEdgeGesture.fromName(_TAP_KEYS[gesture])
+			key.document = document
+			key.foreground = winUser.getForegroundWindow()
+			key.atEnd = gesture == "twoFingerBottomDoubleTap"
+			key.announce = self._announceDocumentEdge
+		else:
+			key = _TapKeyGesture.fromName(_TAP_KEYS[gesture])
 		scriptCopy = (
 			gesture == "threeFingerDoubleTap"
 			and getattr(getattr(key, "script", None), "__name__", None) == "script_copyToClipboard"

@@ -21,7 +21,7 @@ from winBindings import hid, user32
 from windowUtils import CustomWindow
 
 from . import rawInput
-from .preferences import APP_SWITCH_GESTURES
+from .preferences import APP_SWITCH_GESTURES, DOCUMENT_EDGE_TAPS
 from .rotor import getDocument
 from .strokes import MAX_FINGERS, TAP_SERIES_MS, ReportAssembler, Stroke
 from .windowsGestures import WindowsGestureCapture
@@ -52,6 +52,10 @@ _BUILT_IN_TAPS = {
 	(1, "doubletap"): "doubletap",
 	(3, "doubletap"): "threeFingerDoubleTap",
 	(3, "tripletap"): "threeFingerTripleTap",
+}
+_NATIVE_FLAGS_BY_TAP = {
+	"doubletap": rawInput.NATIVE_TAP_FLAGS,
+	**dict.fromkeys(DOCUMENT_EDGE_TAPS.values(), rawInput.NATIVE_TWO_FINGER_TAP_FLAG),
 }
 
 
@@ -513,15 +517,20 @@ def _feedStroke(receiver, device, frame, active, buttonDown, now, direction):
 	strokeHandler = receiver.strokeHandler
 	started = stroke.started if stroke is not None else None
 	sample = None
-	if stroke is not None and (strokeHandler or frame.count >= 3 or started is not None):
+	if stroke is not None and (strokeHandler or frame.count >= 2 or started is not None):
+		if direction in ("clockwise", "counterclockwise"):
+			stroke.edgeTapBlocked = True
 		sample = stroke.feed(frame, device.aspect, buttonDown, now)
 	recording = getattr(receiver, "recording", False)
 	if sample is not None:
 		pattern = sample.pattern
 		inWindow = device.foreground == winUser.getForegroundWindow()
 		if isinstance(pattern, dict) and pattern["gesture"] == "tap":
-			if (strokeHandler or pattern["fingers"] == 3) and inWindow:
-				TouchpadInput._queueTap(receiver, device, pattern["fingers"], started, now)
+			if inWindow and (
+				strokeHandler or pattern["fingers"] == 3
+				or (sample.tapRegion and receiver.tapActivation)
+			):
+				TouchpadInput._queueTap(receiver, device, pattern["fingers"], started, now, sample.tapRegion)
 			else:
 				device.customTaps = None
 			return None
@@ -530,8 +539,10 @@ def _feedStroke(receiver, device, frame, active, buttonDown, now, direction):
 			direction = APP_SWITCH_GESTURES.get(pattern["gesture"], direction)
 		if strokeHandler and inWindow:
 			direction = strokeHandler(pattern, direction, sample.drawing) or direction
-	elif recording and strokeHandler and active and not device.recognizer.inContact:
-		if device.foreground == winUser.getForegroundWindow():
+	elif active and not device.recognizer.inContact:
+		if getattr(device, "customTaps", None) and device.customTaps[1] == 2:
+			device.customTaps = None
+		if recording and strokeHandler and device.foreground == winUser.getForegroundWindow():
 			device.customTaps = None
 			strokeHandler(None, None, None)
 	return None if recording else direction
@@ -791,7 +802,7 @@ class TouchpadInput(CustomWindow):
 			device.foreground = None
 			device.document = None
 
-	def _queueTap(self, device, fingers, started=None, now=None):
+	def _queueTap(self, device, fingers, started=None, now=None, region=None):
 		scope = (device.foreground, device.document, self._generation)
 		previous = getattr(device, "customTaps", None)
 		if now is None:
@@ -806,7 +817,9 @@ class TouchpadInput(CustomWindow):
 			and touchStart - previous[3] <= TAP_SERIES_MS / 1000
 		):
 			repetitions = previous[2] + 1
-		pending = (scope, fingers, repetitions, now)
+			if previous[4] != region:
+				region = None
+		pending = (scope, fingers, repetitions, now, region)
 		device.customTaps = pending
 		callback = getattr(self, "_finishTaps", None) or (
 			lambda dev, item: TouchpadInput._finishTaps(self, dev, item)
@@ -816,12 +829,12 @@ class TouchpadInput(CustomWindow):
 	def _finishTaps(self, device, pending):
 		if not self.handle or getattr(device, "customTaps", None) is not pending:
 			return
-		(foreground, document, generation), fingers, repetitions, lastTapAt = pending
+		(foreground, document, generation), fingers, repetitions, lastTapAt, region = pending
 		if (
 			generation != self._generation
 			or foreground != winUser.getForegroundWindow()
 			or document is not getDocument()
-			or (self.strokeHandler is None and fingers != 3)
+			or (self.strokeHandler is None and fingers not in (2, 3))
 		):
 			device.customTaps = None
 			return
@@ -837,6 +850,8 @@ class TouchpadInput(CustomWindow):
 		device.customTaps = None
 		gesture = ("tap", "doubletap", "tripletap")[repetitions - 1]
 		builtIn = _BUILT_IN_TAPS.get((fingers, gesture))
+		if fingers == 2 and repetitions == 2 and self.tapActivation:
+			builtIn = DOCUMENT_EDGE_TAPS.get(region)
 		direction = (
 			self.strokeHandler({"fingers": fingers, "gesture": gesture}, builtIn, None)
 			if self.strokeHandler
@@ -882,13 +897,14 @@ class TouchpadInput(CustomWindow):
 					and not any(winUser.getAsyncKeyState(key) & 0x8000 for key in _MODIFIERS)
 					and document is getDocument()
 				):
-					if direction == "doubletap":
+					tapFlag = _NATIVE_FLAGS_BY_TAP.get(direction)
+					if tapFlag:
 						parameters = rawInput.TouchpadParameters.read()
-						if parameters is None or parameters.options & rawInput.NATIVE_TAP_FLAGS:
+						if parameters is None or parameters.options & tapFlag:
 							continue
 					if (
 						direction.startswith("swipe")
-						or direction in _BUILT_IN_TAPS.values()
+						or tapFlag or direction in _BUILT_IN_TAPS.values()
 						or direction in APP_SWITCH_GESTURES.values()
 					):
 						self._rotorQuietUntil = 0.0

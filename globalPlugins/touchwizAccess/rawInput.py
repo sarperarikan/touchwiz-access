@@ -50,7 +50,8 @@ SystemParametersInfo.restype = BOOL
 _SPI_GETTOUCHPADPARAMETERS = 0x00AE
 _SPI_SETTOUCHPADPARAMETERS = 0x00AF
 NATIVE_TAP_FLAGS = (1 << 2) | (1 << 3)  # tapEnabled, tapAndDragEnabled
-RECORDING_FLAGS = NATIVE_TAP_FLAGS | (1 << 4) | (1 << 7) | (1 << 8)  # two-finger tap, pan, zoom
+NATIVE_TWO_FINGER_TAP_FLAG = 1 << 4
+RECORDING_FLAGS = NATIVE_TAP_FLAGS | NATIVE_TWO_FINGER_TAP_FLAG | (1 << 7) | (1 << 8)  # pan, zoom
 
 
 class TouchpadParameters(Structure):

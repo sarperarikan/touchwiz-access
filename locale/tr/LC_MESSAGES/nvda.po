@@ -622,6 +622,24 @@ msgstr "Hareketi kaydet"
 msgid "Three-finger double tap"
 msgstr "Üç parmakla çift dokunma"
 
+msgid "Two-finger double tap at the top"
+msgstr "Üst bölgede iki parmakla çift dokunma"
+
+msgid "Two-finger double tap at the bottom"
+msgstr "Alt bölgede iki parmakla çift dokunma"
+
+msgid "Go to the beginning (Ctrl+Home)"
+msgstr "Başa git (Ctrl+Home)"
+
+msgid "Go to the end (Ctrl+End)"
+msgstr "Sona git (Ctrl+End)"
+
+msgid "Focused at the beginning"
+msgstr "En başa odaklanıldı"
+
+msgid "Focused at the end"
+msgstr "En sona odaklanıldı"
+
 msgid "Three-finger triple tap"
 msgstr "Üç parmakla üç kez dokunma"
 

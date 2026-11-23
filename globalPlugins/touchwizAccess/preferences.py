@@ -14,6 +14,7 @@ from .localization import LANGUAGES
 
 DEFAULT_KEY = "nvda+alt+shift+t"
 APP_SWITCH_GESTURES = {"swiperight": "threeFingerSwipeRight", "swipeleft": "threeFingerSwipeLeft"}
+DOCUMENT_EDGE_TAPS = {"top": "twoFingerTopDoubleTap", "bottom": "twoFingerBottomDoubleTap"}
 GESTURES = {
 	"swiperight": "Swipe right",
 	"swipeleft": "Swipe left",
@@ -22,6 +23,8 @@ GESTURES = {
 	"clockwise": "Turn rotor clockwise",
 	"counterclockwise": "Turn rotor counterclockwise",
 	"doubletap": "Single-finger double tap",
+	"twoFingerTopDoubleTap": "Two-finger double tap at the top",
+	"twoFingerBottomDoubleTap": "Two-finger double tap at the bottom",
 	"threeFingerSwipeRight": "Three-finger swipe right",
 	"threeFingerSwipeLeft": "Three-finger swipe left",
 	"threeFingerDoubleTap": "Three-finger double tap",

@@ -16,6 +16,7 @@ TAP_SERIES_MS = 350
 _TAP_DURATION = 0.28
 _TAP_TRAVEL = 0.045
 _SWIPE_DISTANCE = 0.075
+_TAP_EDGE_DEPTH = 1 / 3
 
 
 def signature(points):
@@ -74,6 +75,7 @@ class ReportAssembler:
 class Sample:
 	pattern: dict | list
 	drawing: list | None = None
+	tapRegion: str | None = None
 
 
 class Stroke:
@@ -84,15 +86,18 @@ class Stroke:
 		self.origin = {}
 		self.last = {}
 		self.maxTravel = 0.0
+		self.maxContacts = 0
+		self.edgeTapBlocked = False
 
 	def feed(self, frame, aspect, clicked, now):
 		if clicked or frame.count > MAX_FINGERS:
 			self.blocked = True
 		if not frame.anyTip:
-			result = self._finish(now)
+			result = self._finish(now, aspect)
 			self.__init__()
 			return result
 		contacts = frame.contacts or ((frame.contact,) if frame.contact else ())
+		self.maxContacts = max(self.maxContacts, frame.count, len(contacts))
 		contacts = tuple(contact for contact in contacts if contact.confident)
 		if len(contacts) > MAX_FINGERS:
 			self.blocked = True
@@ -117,12 +122,23 @@ class Stroke:
 				self.points.append(point)
 		return None
 
-	def _finish(self, now):
+	def _tapRegion(self, aspect):
+		topEdge = aspect * _TAP_EDGE_DEPTH
+		bottomEdge = aspect - topEdge
+		positions = (*self.origin.values(), *self.last.values())
+		if all(y <= topEdge for _, y in positions):
+			return "top"
+		if all(y >= bottomEdge for _, y in positions):
+			return "bottom"
+		return None
+
+	def _finish(self, now, aspect):
 		if self.blocked or self.started is None or not self.last:
 			return None
 		fingers = len(self.origin)
 		if now - self.started <= _TAP_DURATION and self.maxTravel <= _TAP_TRAVEL:
-			return Sample({"fingers": fingers, "gesture": "tap"})
+			region = self._tapRegion(aspect) if fingers == self.maxContacts == 2 and not self.edgeTapBlocked else None
+			return Sample({"fingers": fingers, "gesture": "tap"}, tapRegion=region)
 		drawing = signature(self.points) if fingers == 1 else None
 		deltas = [
 			(self.last[key][0] - point[0], self.last[key][1] - point[1]) for key, point in self.origin.items()
